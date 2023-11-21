@@ -26,18 +26,15 @@ class motherAccount extends Account {
   constructor() {
     super(0, "Mamma");
   }
-  addInterest(): void {
-    const interest = this.balanceInit * 0.1;
-    this.deposit(interest);
-  }
   deposit(amount: number): void {
     super.deposit(amount);
-    this.addInterest();
+    const interest = this.balanceInit * 0.1;
+    this.balanceInit -= interest;
   }
-
   withdraw(amount: number): void {
     super.withdraw(amount);
-    this.addInterest();
+    const interest = this.balanceInit * 0.1;
+    super.withdraw(interest);    
   }
 }
 
@@ -53,8 +50,8 @@ console.log(sA.getBalance());
 sA.withdraw(15);
 console.log(sA.getBalance());
 
-mA.deposit(100);
+mA.deposit(1000);
 console.log(mA.getBalance());
 
-mA.withdraw(10);
+mA.withdraw(100);
 console.log(mA.getBalance());
