@@ -10,7 +10,7 @@ class Account {
     return `Il saldo attuale del conto di ${this.name} è uguale a ${this.balanceInit}`;
   }
   deposit(amount: number): void {
-    this.balanceInit += amount;
+    this.balanceInit += amount;    
   }
   withdraw(amount: number): void {
     this.balanceInit -= amount;
@@ -30,6 +30,15 @@ class motherAccount extends Account {
     const interest = this.balanceInit * 0.1;
     this.deposit(interest);
   }
+  deposit(amount: number): void {
+    super.deposit(amount);
+    this.addInterest();
+  }
+
+  withdraw(amount: number): void {
+    super.withdraw(amount);
+    this.addInterest();
+  }
 }
 
 const sA = new sonAccount();
@@ -44,9 +53,7 @@ console.log(sA.getBalance());
 sA.withdraw(15);
 console.log(sA.getBalance());
 
-
 mA.deposit(100);
-mA.addInterest();
 console.log(mA.getBalance());
 
 mA.withdraw(10);

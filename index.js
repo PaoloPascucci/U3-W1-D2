@@ -45,6 +45,14 @@ var motherAccount = /** @class */ (function (_super) {
         var interest = this.balanceInit * 0.1;
         this.deposit(interest);
     };
+    motherAccount.prototype.deposit = function (amount) {
+        _super.prototype.deposit.call(this, amount);
+        this.addInterest();
+    };
+    motherAccount.prototype.withdraw = function (amount) {
+        _super.prototype.withdraw.call(this, amount);
+        this.addInterest();
+    };
     return motherAccount;
 }(Account));
 var sA = new sonAccount();
@@ -56,7 +64,6 @@ console.log(sA.getBalance());
 sA.withdraw(15);
 console.log(sA.getBalance());
 mA.deposit(100);
-mA.addInterest();
 console.log(mA.getBalance());
 mA.withdraw(10);
 console.log(mA.getBalance());
